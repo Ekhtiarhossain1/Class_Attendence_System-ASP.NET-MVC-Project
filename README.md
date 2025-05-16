@@ -20,7 +20,7 @@ This is a web-based Class Attendance System built with ASP.NET Core. The applica
 ## Getting Started
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Ekhtiarhossain1/Class_Attendence_System-ASP.NET-MVC-Project.git
    ```
 2. Open the solution in Visual Studio or VS Code.
 3. Restore NuGet packages:
