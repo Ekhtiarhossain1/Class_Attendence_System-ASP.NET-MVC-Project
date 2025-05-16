@@ -42,7 +42,7 @@ This is a web-based Class Attendance System built with ASP.NET Core. The applica
 - Use `appsettings.Development.json` for local development overrides.
 
 ## Screenshots
-_Add screenshots here. You can add images to this section later._
+I will add screenshot here. When i am free.
 
 ## License
 This project is for educational purposes.
