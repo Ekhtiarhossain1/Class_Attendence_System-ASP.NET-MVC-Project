@@ -1,0 +1,35 @@
+@model IEnumerable<ClassAttendanceSystem.Models.Section>
+@{
+    ViewData["Title"] = "Sections";
+    bool showDashboardButton = ViewBag.ShowDashboardButton == true;
+}
+<h2 class="text-center my-4">Sections</h2>
+@if (showDashboardButton)
+{
+    <div class="mb-4">
+        <a href="@Url.Action("Dashboard", "Teacher")" class="btn btn-outline-primary px-4 py-2 fw-bold">Back to
+            Dashboard</a>
+    </div>
+}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <a class="btn btn-primary px-4 py-2 fw-bold" href="@Url.Action("Create")">Create New Section</a>
+</div>
+<div class="d-flex flex-row flex-wrap justify-content-center gap-4">
+    @foreach (var s in Model)
+    {
+        <div class="card m-2 shadow-sm border-primary section-card animate-fade-in"
+            style="min-width: 220px; max-width: 250px; cursor:pointer; transition: transform 0.2s;">
+            <button class="btn btn-outline-primary w-100 h-100 py-4" style="border:none; background:transparent;"
+                onclick="window.location.href='@Url.Action("ViewAttendance", "Attendance", new { sectionId = s.Id })'">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">@s.Name</h5>
+                </div>
+            </button>
+            <form asp-action="Delete" method="post" class="mt-2 text-center">
+                <input type="hidden" name="id" value="@s.Id" />
+                <button type="submit" class="btn btn-sm btn-danger w-75">Remove Section</button>
+            </form>
+        </div>
+    }
+</div>
+<!-- All spacing and clickable elements now use Bootstrap button classes for a true button feel -->

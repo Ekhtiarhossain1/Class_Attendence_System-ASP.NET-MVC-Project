@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "View Attendance";
+    var sections = ViewBag.Sections as List<ClassAttendanceSystem.Models.Section>;
+    int? selectedSectionId = ViewBag.SectionId as int?;
+}
+
+<h2 class="text-center my-4">View Attendance</h2>
+<div class="row justify-content-center mb-4">
+    <div class="col-md-6">
+        <form asp-action="ViewAttendance" method="post" class="card p-3 shadow-sm border-primary animate-fade-in">
+            <label for="sectionId" class="form-label fw-bold">Select Section:</label>
+            <select id="sectionId" name="sectionId" class="form-control mb-3 py-2 px-2" onchange="this.form.submit()" required>
+                <option value="">-- Select Section --</option>
+                @if (sections != null)
+                {
+                    foreach (var s in sections)
+                    {
+                        if(selectedSectionId.HasValue && selectedSectionId.Value == s.Id)
+                        {
+                            <option value="@s.Id" selected>@s.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@s.Id">@s.Name</option>
+                        }
+                    }
+                }
+            </select>
+        </form>
+        <div class="text-center mt-3">
+            <a href="@Url.Action("Dashboard", "Teacher")" class="btn btn-outline-primary px-4 py-2 fw-bold">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+@if (Model != null)
+{
+    <table class="table table-bordered table-hover animate-fade-in">
+        <thead class="table-light">
+            <tr>
+                <th>Date</th>
+                <th>Attendance Count</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var record in Model)
+            {
+                <tr>
+                    <td>@record.Date.ToShortDateString()</td>
+                    <td>@record.Count</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-primary px-3 py-2 fw-bold" asp-action="EditAttendance" asp-route-date="@record.Date" asp-route-sectionId="@selectedSectionId">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

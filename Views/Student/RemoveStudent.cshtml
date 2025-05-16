@@ -1,0 +1,83 @@
+@model IEnumerable<ClassAttendanceSystem.Models.Student>
+@{
+    ViewData["Title"] = "Remove Student";
+    var sections = ViewBag.Sections as List<ClassAttendanceSystem.Models.Section>;
+    int? selectedSectionId = ViewBag.SelectedSectionId as int?;
+}
+<style>
+    .remove-btn {
+        color: #dc3545;
+        background: transparent;
+        border: 1px solid #dc3545;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .remove-btn:hover,
+    .remove-btn:focus {
+        color: #fff;
+        background: #dc3545;
+        border: 1px solid #dc3545;
+    }
+</style>
+<h2 class="text-center my-4">Remove Student</h2>
+<div class="row justify-content-center mb-4">
+    <div class="col-md-6">
+        <form asp-action="RemoveStudent" method="post" class="card p-3 shadow-sm border-primary animate-fade-in">
+            <label for="sectionId" class="form-label fw-bold">Select Section:</label>
+            <select id="sectionId" name="sectionId" class="form-control mb-3 py-2 px-2" onchange="this.form.submit()"
+                required>
+                <option value="">-- Select Section --</option>
+                @if (sections != null)
+                {
+                    foreach (var s in sections)
+                    {
+                        if (selectedSectionId.HasValue && selectedSectionId.Value == s.Id)
+                        {
+                            <option value="@s.Id" selected>@s.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@s.Id">@s.Name</option>
+                        }
+                    }
+                }
+            </select>
+        </form>
+    </div>
+</div>
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered table-hover animate-fade-in">
+        <thead class="table-light">
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.StudentId</td>
+                    <td>@student.Name</td>
+                    <td>
+                        <form asp-action="DeleteStudent" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@student.Id" />
+                            <input type="hidden" name="sectionId" value="@selectedSectionId" />
+                            <button type="submit" class="remove-btn btn btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (selectedSectionId.HasValue)
+{
+    <div class="alert alert-info text-center">No students found in this section.</div>
+}
+
+
+   
+                

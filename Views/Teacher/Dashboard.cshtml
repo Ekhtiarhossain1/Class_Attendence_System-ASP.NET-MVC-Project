@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    var role = Context.Session.GetString("UserRole");
+}
+<div class="container py-5 animate-fade-in">
+    <h2 class="text-center mb-5 fw-bold">Teacher Dashboard</h2>
+    <div class="row justify-content-center gap-4">
+        @if (role == "Admin")
+        {
+            <div class="col-md-4 mb-4">
+                <a href="@Url.Action("CreateStudent", "Student")" class="btn btn-lg btn-primary w-100 py-4 fw-bold shadow-sm">Add Student</a>
+            </div>
+            <div class="col-md-4 mb-4">
+                <a href="@Url.Action("Index", "Section")" class="btn btn-lg btn-secondary w-100 py-4 fw-bold shadow-sm">Manage Sections</a>
+            </div>
+        }
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("TakeAttendance", "Attendance")" class="btn btn-lg btn-success w-100 py-4 fw-bold shadow-sm">Take Attendance</a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("ViewAttendance", "Attendance")" class="btn btn-lg btn-info w-100 py-4 fw-bold shadow-sm">View Attendance</a>
+        </div>
+    </div>
+</div>
+<!-- Dashboard now uses large, spaced, button-style actions for a modern, accessible look -->

@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+<style>
+    .remove-student-btn {
+        color: #dc3545 !important;
+        background: #fff !important;
+        border: 2px solid #dc3545 !important;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .remove-student-btn:hover,
+    .remove-student-btn:focus {
+        color: #fff !important;
+        background: #dc3545 !important;
+        border: 2px solid #dc3545 !important;
+    }
+</style>
+<div class="container py-5 animate-fade-in">
+    <h2 class="text-center mb-5 fw-bold">Admin Dashboard</h2>
+    <div class="alert alert-info text-center">Welcome, Admin! (This is a placeholder dashboard. Add admin features
+        here.)</div>
+    <div class="row justify-content-center gap-4">
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Index", "Section")"
+                class="btn btn-lg btn-secondary w-100 py-4 fw-bold shadow-sm">Manage Sections</a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Dashboard", "Teacher")" class="btn btn-lg btn-primary w-100 py-4 fw-bold shadow-sm">Go
+                to Teacher Dashboard</a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("RemoveStudent", "Student")"
+                class="btn btn-lg remove-student-btn w-100 py-4 fw-bold shadow-sm">Remove Student</a>
+        </div>
+    </div>
+</div>
+<!-- Admin dashboard with Remove Student button -->
+
+       
+       

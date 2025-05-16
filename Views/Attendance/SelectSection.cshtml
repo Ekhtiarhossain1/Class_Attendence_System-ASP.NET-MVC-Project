@@ -1,0 +1,23 @@
+@model IEnumerable<ClassAttendanceSystem.Models.Section>
+@{
+    ViewData["Title"] = "Select Section";
+}
+<h2 class="text-center my-4">Select Section</h2>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="SelectSection" method="post" class="card p-4 shadow-sm border-primary animate-fade-in">
+            <div class="form-group mb-4">
+                <label for="sectionId" class="form-label fw-bold">Section</label>
+                <select id="sectionId" name="sectionId" class="form-control py-2 px-2 mb-3" required>
+                    <option value="">-- Select Section --</option>
+                    @foreach (var s in Model)
+                    {
+                        <option value="@s.Id">@s.Name</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Continue</button>
+        </form>
+    </div>
+</div>
+<!-- Removed 'Create New Section' button from Take Attendance -->

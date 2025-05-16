@@ -1,0 +1,39 @@
+@model ClassAttendanceSystem.Models.Student
+@{
+    ViewData["Title"] = "Create Student";
+    var sections = ViewBag.Sections as List<ClassAttendanceSystem.Models.Section>;
+}
+<h2 class="text-center my-4">Create Student</h2>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <form asp-action="CreateStudent" method="post" class="card p-4 shadow-sm border-primary animate-fade-in">
+            <div class="mb-4">
+                <label for="name" class="form-label fw-bold">Name</label>
+                <input type="text" id="name" name="Name" class="form-control py-2 px-2" required />
+            </div>
+            <div class="mb-4">
+                <label for="studentId" class="form-label fw-bold">Student ID</label>
+                <input type="text" id="studentId" name="StudentId" class="form-control py-2 px-2" required />
+            </div>
+            <div class="mb-4">
+                <label for="selectedSectionId" class="form-label fw-bold">Select Section</label>
+                <select id="selectedSectionId" name="selectedSectionId" class="form-control py-2 px-2">
+                    <option value="">-- Select Section --</option>
+                    @if (sections != null)
+                    {
+                        foreach (var s in sections)
+                        {
+                            <option value="@s.Id">@s.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="d-flex justify-content-between gap-3">
+                <button type="submit" class="btn btn-success px-4 py-2 fw-bold">Create</button>
+                <a asp-controller="Teacher" asp-action="Dashboard"
+                    class="btn btn-secondary px-4 py-2 fw-bold">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Removed 'Create New Section' from Add Student form -->

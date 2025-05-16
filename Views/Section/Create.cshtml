@@ -1,0 +1,27 @@
+@model ClassAttendanceSystem.Models.Section
+@{
+    ViewData["Title"] = "Create Section";
+    bool showDashboardButton = ViewBag.ShowDashboardButton == true;
+}
+<h2 class="text-center my-4">Create Section</h2>
+@if (showDashboardButton)
+{
+    <div class="mb-4">
+        <a href="@Url.Action("Dashboard", "Teacher")" class="btn btn-outline-primary px-4 py-2 fw-bold">Back to Dashboard</a>
+    </div>
+}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post" class="card p-4 shadow-sm border-primary">
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">Create</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
